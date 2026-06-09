@@ -15,7 +15,6 @@ logger = logging.getLogger("MerchXCore")
 
 app = FastAPI(title="MerchX Industrial Core")
 
-# Enable CORS for production routing flexibility
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,7 +39,6 @@ async def run_ai_merchandiser(payload: ProductRequest):
         logger.info(f"Processing structural parameters for: '{payload.title}'")
         hash_calc = len(payload.title)
         
-        # Calculate all 10 distinct telemetry fields
         conversion = round(random.uniform(2.4, 5.8) * (1.1 if hash_calc % 2 == 0 else 0.9), 2)
         rev_raw = round((payload.cost_price * random.uniform(12.5, 34.8)), 1)
         revenue = f"${rev_raw}k" if rev_raw >= 1.0 else f"${int(rev_raw * 1000)}"
@@ -82,31 +80,16 @@ async def run_ai_merchandiser(payload: ProductRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# FORCE READ FILE DIRECTLY VIA SERVERLESS ENVIRONMENT LAYERS
+# FOOLPROOF LOCAL DIRECTORY FILE SERVING
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
-    try:
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        parent_dir = os.path.dirname(current_dir)
-        
-        # Checking all logical runtime path patterns on Vercel
-        path_options = [
-            os.path.join(parent_dir, "public", "code.html"),
-            os.path.join(parent_dir, "public", "index.html"),
-            os.path.join(current_dir, "public", "code.html"),
-            os.path.join(current_dir, "public", "index.html"),
-            os.path.join(parent_dir, "code.html"),
-            os.path.join(parent_dir, "index.html"),
-            "public/code.html",
-            "public/index.html",
-            "code.html"
-        ]
-        
-        for file_path in path_options:
-            if os.path.exists(file_path):
-                with open(file_path, "r", encoding="utf-8") as f:
-                    return f.read()
-                    
-        return f"<h1>Backend Connected Successfully</h1><p>Frontend file layout search timeout.</p><p>Checked locations: {str(path_options)}</p>"
-    except Exception as e:
-        return f"<h1>Internal Server Routing Error</h1><p>{str(e)}</p>"
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Check for either name variant inside the api directory
+    for filename in ["code.html", "index.html"]:
+        file_path = os.path.join(current_dir, filename)
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                return f.read()
+                
+    return "<h1>Error</h1><p>HTML file missing inside api/ directory.</p>"
