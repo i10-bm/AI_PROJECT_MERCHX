@@ -1,11 +1,8 @@
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, validator
 import logging
 import random
-import time
-import os
 
 logging.basicConfig(
     level=logging.INFO,
@@ -83,9 +80,7 @@ async def run_ai_merchandiser(payload: ProductRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# DYNAMIC PRODUCTION PATH RESOLUTION FOR SERVERLESS STATIC SERVING
+# Clean production fallback response
 @app.get("/")
-async def serve_dashboard():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    html_path = os.path.join(base_dir, "public", "code.html")
-    return FileResponse(html_path)
+async def root_fallback():
+    return {"status": "online", "service": "MerchX Core Engine Infrastructure"}
