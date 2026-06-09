@@ -83,7 +83,9 @@ async def run_ai_merchandiser(payload: ProductRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# CRITICAL UPDATED PRODUCTION SERVERLESS ROUTE FOR VERCEL
+# DYNAMIC PRODUCTION PATH RESOLUTION FOR SERVERLESS STATIC SERVING
 @app.get("/")
 async def serve_dashboard():
-    return FileResponse("public/code.html")
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    html_path = os.path.join(base_dir, "public", "code.html")
+    return FileResponse(html_path)
