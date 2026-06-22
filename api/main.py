@@ -146,9 +146,9 @@ async def serve_landing_page():
                     <button onclick="toggleGuide(false)" class="text-[#908fa0] hover:text-white font-bold text-lg">&times;</button>
                 </div>
                 <div class="space-y-3 text-[#dae2fd]">
-                    <p><span class="text-[#c0c1ff] font-bold">1. Select Engine Route:</span> Click any active API chip header at the top toolbar to assign the backend engine route.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">2. Trigger Execution:</span> Update parameters inside the control card, then hit <span class="text-[#4edea3]">Execute Autonomous Stream</span> to compute live weights.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">3. Review 10 Data Answers:</span> Observe the data telemetry output rows update immediately below.</p>
+                    <p><span class="text-[#c0c1ff] font-bold">1. Select Engine Route:</span> Click any active API chip header at the top toolbar to re-route live endpoints.</p>
+                    <p><span class="text-[#c0c1ff] font-bold">2. Trigger Execution:</span> Update fields inside the control card, then hit <span class="text-[#4edea3]">Execute Autonomous Stream</span> to compute metrics.</p>
+                    <p><span class="text-[#c0c1ff] font-bold">3. Review 10 Data Points:</span> Observe the populated grid components update automatically without empty frames.</p>
                 </div>
                 <button onclick="toggleGuide(false)" class="w-full mt-5 h-9 bg-[#131b2e] border border-[#908fa0]/30 hover:border-[#4edea3] text-white font-bold rounded-sm uppercase tracking-wider">
                     Acknowledge & Continue
@@ -172,8 +172,8 @@ async def serve_landing_page():
                     <span id="api-gpt" onclick="switchEngine('gpt-4o', this)" class="api-badge active font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black">⚡ GPT-4O CORE</span>
                     <span id="api-shopify" onclick="switchEngine('shopify', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SHOPIFY API</span>
                     <span id="api-trends" onclick="switchEngine('google-trends', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">GOOGLE TRENDS</span>
-                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SEMRUSH SUITE</span>
-                    <span id="api-meta" onclick="switchEngine('meta', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">META ADS API</span>
+                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SEMRUSH DATA</span>
+                    <span id="api-meta" onclick="switchEngine('meta', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">META ADS SUITE</span>
                 </div>
             </header>
 
@@ -303,9 +303,10 @@ async def serve_landing_page():
                 element.classList.add('active');
                 activeEngine = engineId;
                 
-                document.getElementById('console-stream').innerHTML += `
-                    <div class="text-[#ffb95f]">[SYSTEM] Swapped active router endpoint to: <strong>\${engineId.toUpperCase()} Engine Array</strong>.</div>
-                `;
+                // FIXED CONCATENATION TO ELIMINATE JAVASCRIPT STRING BUGS AND RE-FORMATTED FOR VERCEL
+                var formattedStr = '<div class="text-[#ffb95f]">[SYSTEM] Swapped active router endpoint to: <strong>' + 
+                                   engineId.toUpperCase() + ' Engine Array</strong>.</div>';
+                document.getElementById('console-stream').innerHTML += formattedStr;
             }
 
             function validateSystemAccess() {
@@ -333,10 +334,8 @@ async def serve_landing_page():
                 btn.disabled = true;
                 btn.innerText = "RUNNING CRITICAL CALLS...";
                 
-                stream.innerHTML = `
-                    <div class="text-[#c0c1ff]">[System Core] Forwarding fields into \${activeEngine.toUpperCase()} cluster stream...</div>
-                    <div class="text-white">[External Network Sync] Syncing metrics via multi-agent pipelines...</div>
-                `;
+                stream.innerHTML = '<div class="text-[#c0c1ff]">[System Core] Forwarding fields into ' + activeEngine.toUpperCase() + ' cluster stream...</div>' +
+                                   '<div class="text-white">[External Network Sync] Syncing metrics via multi-agent pipelines...</div>';
 
                 try {
                     const res = await fetch('/api/run-merchandiser', {
