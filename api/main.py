@@ -21,10 +21,9 @@ class ProductRequest(BaseModel):
 @app.post("/api/run-merchandiser")
 async def run_ai_merchandiser(payload: ProductRequest):
     try:
-        # Cross-API Simulation Matrix
         v_idx = random.randint(75, 99)
         google_trends_score = random.randint(68, 96)
-        semrush_volume = f"{random.randint(15, 90)}k Searches"
+        semrush_volume = f"{random.randint(15, 90)}k"
         meta_roas = f"{random.uniform(3.1, 5.8):.2f}x"
         
         conversion_lift = round(random.uniform(2.1, 6.4), 2)
@@ -44,7 +43,7 @@ async def run_ai_merchandiser(payload: ProductRequest):
             "target_retail": f"${target_retail:,}",
             "gross_margin": f"{gross_margin}%",
             "keywords": [
-                {"name": f"buy {payload.title.lower()} online", "score": random.randint(80, 99)},
+                {"name": f"premium {payload.title.lower()}", "score": random.randint(80, 99)},
                 {"name": f"trending {payload.title.lower()} 2026", "score": random.randint(65, 88)}
             ]
         }
@@ -53,6 +52,7 @@ async def run_ai_merchandiser(payload: ProductRequest):
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_landing_page():
+    # Serving HTML explicitly to guarantee layout availability
     return """
     <!DOCTYPE html>
     <html lang="en">
@@ -79,7 +79,6 @@ async def serve_landing_page():
     </head>
     <body class="bg-[#060e20] text-onSurface font-sans min-h-screen">
 
-        <!-- DUMMY LOGIN GATEWAY -->
         <div id="login-gateway" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060e20]/95 backdrop-blur-md">
             <div class="w-full max-w-md bg-surfaceContainer border border-outline/20 p-8 rounded-md shadow-2xl">
                 <div class="text-center mb-6">
@@ -92,11 +91,11 @@ async def serve_landing_page():
                 
                 <div class="bg-surfaceLow border border-outline/10 p-3 rounded-sm mb-4 font-mono text-[11px] text-tertiary">
                     <span class="font-bold block">💡 DUMMY LOGIN CREDENTIALS:</span>
-                    Username: <span class="text-white select-all font-bold">admin</span><br>
-                    Password: <span class="text-white select-all font-bold">merchx2026</span>
+                    Username: <span class="text-white font-bold">admin</span><br>
+                    Password: <span class="text-white font-bold">merchx2026</span>
                 </div>
 
-                <form onsubmit="handleLogin(event)" class="space-y-4">
+                <form id="login-form" class="space-y-4">
                     <div>
                         <label class="block font-mono text-[11px] uppercase text-outline mb-1">User Identifier</label>
                         <input type="text" id="username" required class="w-full h-10 bg-[#060e20] border border-outline/30 rounded-sm px-3 font-mono text-sm text-white focus:outline-none focus:border-primary">
@@ -113,7 +112,6 @@ async def serve_landing_page():
             </div>
         </div>
 
-        <!-- MAIN APPLICATION DASHBOARD (Hidden before login) -->
         <div id="dashboard-app" class="hidden min-h-screen flex flex-col">
             <header class="bg-surfaceContainer border-b border-outline/20 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center space-x-4">
@@ -124,9 +122,8 @@ async def serve_landing_page():
                     <span class="font-mono text-[10px] bg-surfaceHigh text-outline px-2 py-0.5 rounded-sm border border-outline/10">v2.4-Autonomous</span>
                 </div>
                 
-                <!-- INTEGATIONS DISPLAY: LOUD AND CLEAR -->
                 <div class="flex flex-wrap gap-2 items-center justify-center">
-                    <span class="font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black animate-pulse">⚡ GPT-4o COGNITIVE ENGINE COPLUGGED</span>
+                    <span class="font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black animate-pulse">⚡ GPT-4o ENGINE COPLUGGED</span>
                     <span class="font-mono text-[10px] px-2 py-1 rounded-sm bg-surfaceLow text-outline border border-outline/20">SHOPIFY API</span>
                     <span class="font-mono text-[10px] px-2 py-1 rounded-sm bg-surfaceLow text-outline border border-outline/20">GOOGLE TRENDS API</span>
                     <span class="font-mono text-[10px] px-2 py-1 rounded-sm bg-surfaceLow text-outline border border-outline/20">SEMRUSH API</span>
@@ -135,11 +132,10 @@ async def serve_landing_page():
             </header>
 
             <main class="flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- PANEL: INPUTS -->
                 <div class="lg:col-span-4 flex flex-col space-y-6">
                     <section class="bg-surfaceContainer border border-outline/20 rounded-md p-5">
                         <h3 class="font-mono text-xs uppercase text-primary font-bold mb-4 border-b border-outline/10 pb-2">Target Integration Stream</h3>
-                        <form onsubmit="executePipeline(event)" class="space-y-4">
+                        <form id="pipeline-form" class="space-y-4">
                             <div>
                                 <label class="block font-mono text-[11px] uppercase text-outline mb-1">Product Title</label>
                                 <input type="text" id="prod-title" required placeholder="e.g., Premium Leather Jacket" class="w-full h-10 bg-surfaceLow border border-outline/30 rounded-sm px-3 text-sm text-white focus:outline-none focus:border-primary">
@@ -148,22 +144,20 @@ async def serve_landing_page():
                                 <label class="block font-mono text-[11px] uppercase text-outline mb-1">Base Wholesale Cost ($)</label>
                                 <input type="number" id="prod-cost" step="0.01" required placeholder="50.00" class="w-full h-10 bg-surfaceLow border border-outline/30 rounded-sm px-3 text-sm text-white focus:outline-none focus:border-primary">
                             </div>
-                            <button type="submit" id="submit-btn" class="w-full h-10 bg-secondary text-[#003824] font-bold text-sm rounded-sm uppercase font-mono tracking-wider">
+                            <button type="submit" id="submit-btn" class="w-full h-10 bg-secondary text-[#003824] font-bold text-sm rounded-sm uppercase font-mono tracking-wider w-full">
                                 Execute Autonomous Stream
-                    </button>
+                            </button>
                         </form>
                     </section>
 
-                    <!-- LOG CONSOLE SHOWN LOUD AND CLEAR -->
                     <section class="bg-surfaceContainer border border-outline/20 rounded-md p-5 flex-1 flex flex-col min-h-[200px]">
                         <h3 class="font-mono text-xs uppercase text-primary font-bold mb-3 border-b border-outline/10 pb-2">Live AI Orchestration Pipeline</h3>
                         <div id="console-stream" class="flex-1 bg-surfaceLow border border-outline/10 rounded-sm p-3 font-mono text-[11px] text-green-400 overflow-y-auto space-y-1">
-                            <span class="text-outline text-opacity-50">[SYSTEM] Initialization idle. Enter structural target configurations above.</span>
+                            <span class="text-outline text-opacity-50">[SYSTEM] Initialization idle. Enter target metrics.</span>
                         </div>
                     </section>
                 </div>
 
-                <!-- PANEL: LIVE API TELEMETRY DATA -->
                 <div class="lg:col-span-8 space-y-6">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="bg-surfaceContainer border border-outline/20 p-4 rounded-md">
@@ -215,17 +209,21 @@ async def serve_landing_page():
         </div>
 
         <script>
-            function handleLogin(e) {
+            // Cleaned Event Bindings preventing layout blocking
+            document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (document.getElementById('username').value === 'admin' && document.getElementById('password').value === 'merchx2026') {
-                    document.getElementById('login-gateway').classList.add('hidden');
+                const u = document.getElementById('username').value;
+                const p = document.getElementById('password').value;
+                
+                if (u === 'admin' && p === 'merchx2026') {
+                    document.getElementById('login-gateway').style.display = 'none';
                     document.getElementById('dashboard-app').classList.remove('hidden');
                 } else {
                     document.getElementById('login-error').classList.remove('hidden');
                 }
-            }
+            });
 
-            async function executePipeline(e) {
+            document.getElementById('pipeline-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const btn = document.getElementById('submit-btn');
                 const stream = document.getElementById('console-stream');
@@ -266,10 +264,12 @@ async def serve_landing_page():
 
                     const kwBox = document.getElementById('keyword-list');
                     kwBox.innerHTML = '';
-                    data.keywords.forEach(k => {
-                        kwBox.innerHTML += \`<div class="flex justify-between bg-surfaceLow p-2 border border-outline/10 rounded-sm">
-                            <span class="text-primary font-bold">\${k.name}</span><span class="text-white">Vol: \${k.score}k</span>
-                        </div>\`;
+                    
+                    data.keywords.forEach(function(k) {
+                        kwBox.innerHTML += '<div class="flex justify-between bg-surfaceLow p-2 border border-outline/10 rounded-sm">' +
+                            '<span class="text-primary font-bold">' + k.name + '</span>' +
+                            '<span class="text-white">Vol: ' + k.score + 'k</span>' +
+                            '</div>';
                     });
                 } catch(err) {
                     stream.innerHTML += '<div class="text-red-400 font-bold">[ERROR] Pipeline connectivity issue.</div>';
@@ -277,7 +277,7 @@ async def serve_landing_page():
                     btn.disabled = false;
                     btn.innerText = "Execute Autonomous Stream";
                 }
-            }
+            });
         </script>
     </body>
     </html>
