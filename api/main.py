@@ -147,8 +147,8 @@ async def serve_landing_page():
                 </div>
                 <div class="space-y-3 text-[#dae2fd]">
                     <p><span class="text-[#c0c1ff] font-bold">1. Select Engine Route:</span> Click any active API chip header at the top toolbar to assign the backend engine route.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">2. Trigger Execution:</span> Update input fields inside the control card, then hit <span class="text-[#4edea3]">Execute Autonomous Stream</span> to compute live weights.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">3. Review 10 Data Answers:</span> Observe the populated grid segments updating on successful responses.</p>
+                    <p><span class="text-[#c0c1ff] font-bold">2. Trigger Execution:</span> Update parameters inside the control card, then hit <span class="text-[#4edea3]">Execute Autonomous Stream</span> to compute live weights.</p>
+                    <p><span class="text-[#c0c1ff] font-bold">3. Review 10 Data Answers:</span> Observe the data telemetry output rows update immediately below.</p>
                 </div>
                 <button onclick="toggleGuide(false)" class="w-full mt-5 h-9 bg-[#131b2e] border border-[#908fa0]/30 hover:border-[#4edea3] text-white font-bold rounded-sm uppercase tracking-wider">
                     Acknowledge & Continue
@@ -169,10 +169,10 @@ async def serve_landing_page():
                 </div>
                 
                 <div class="flex flex-wrap gap-2 items-center justify-center">
-                    <span id="api-gpt" onclick="switchEngine('gpt-4o', this)" class="api-badge active font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black">⚡ GPT-4O LAYER</span>
-                    <span id="api-shopify" onclick="switchEngine('shopify', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SHOPIFY ENGINE</span>
-                    <span id="api-trends" onclick="switchEngine('google-trends', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">TRENDS API</span>
-                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SEMRUSH DATA</span>
+                    <span id="api-gpt" onclick="switchEngine('gpt-4o', this)" class="api-badge active font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black">⚡ GPT-4O CORE</span>
+                    <span id="api-shopify" onclick="switchEngine('shopify', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SHOPIFY API</span>
+                    <span id="api-trends" onclick="switchEngine('google-trends', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">GOOGLE TRENDS</span>
+                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SEMRUSH SUITE</span>
                     <span id="api-meta" onclick="switchEngine('meta', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">META ADS API</span>
                 </div>
             </header>
@@ -199,7 +199,7 @@ async def serve_landing_page():
                     <section class="bg-[#171f33] border border-[#908fa0]/20 rounded-md p-5 flex-1 flex flex-col min-h-[200px]">
                         <h3 class="font-mono text-xs uppercase text-[#c0c1ff] font-bold mb-3 border-b border-[#908fa0]/10 pb-2">Live AI Orchestration Pipeline</h3>
                         <div id="console-stream" class="flex-1 bg-[#131b2e] border border-[#908fa0]/10 rounded-sm p-3 font-mono text-[11px] text-green-400 overflow-y-auto space-y-1">
-                            <span class="text-[#4edea3]">[INITIALIZED] Live dashboard pre-loaded with stable telemetry buffers.</span>
+                            <span class="text-[#4edea3]">[INITIALIZED] Pre-populated dashboard live data stream verified.</span>
                         </div>
                     </section>
                 </div>
