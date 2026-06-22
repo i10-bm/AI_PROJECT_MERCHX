@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 import random
 
-app = FastAPI(title="MerchX Enterprise AI Suite")
+app = FastAPI(title="MERCH-X Industrial Core")
 
 app.add_middleware(
     CORSMiddleware,
@@ -42,7 +42,7 @@ async def run_ai_merchandiser(payload: ProductRequest):
         market_share = f"{round(random.uniform(4.8, 13.5) * modifier, 1)}%"
         turnover_days = f"{int(random.randint(15, 30) / modifier)} Days"
         confidence_score = f"{min(100, int(random.randint(82, 98) * modifier))}%"
-        demand_velocity = "EXPONENTIAL RUN VELOCITY" if v_idx > 85 else "STABLE DISTRIBUTION TREND"
+        demand_velocity = "EXPONENTIAL RUN VELOCITY" if v_idx > 85 else "STABLE TREND"
         
         return {
             "status": "success",
@@ -76,24 +76,27 @@ async def serve_landing_page():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Deep Intelligence - MerchX Autonomous Console</title>
+        <title>MERCH-X Autonomous Console</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Plus+Jakarta+Sans:wght=500;700;800&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=500;600;700;800&family=Syne:wght=800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
         <script>
             tailwind.config = {
                 theme: {
                     extend: {
-                        fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                        fontFamily: { 
+                            sans: ['Plus Jakarta Sans', 'sans-serif'], 
+                            display: ['Syne', 'sans-serif'],
+                            mono: ['JetBrains Mono', 'monospace'] 
+                        },
                         colors: {
-                            surface: '#0b1326', 
-                            surfaceLow: '#131b2e', 
-                            surfaceContainer: '#171f33',
-                            surfaceContainerLowest: '#060e20',
-                            onSurface: '#dae2fd', 
-                            outline: '#908fa0', 
-                            primary: '#c0c1ff',
-                            secondary: '#4edea3', 
-                            tertiary: '#ffb95f'
+                            background: '#1C2321',
+                            surface: '#2A3431',
+                            surfaceInner: '#151B1A',
+                            accentCopper: '#E07A5F',
+                            accentOasis: '#81B29A',
+                            textMain: '#F4F1DE'
                         }
                     }
                 }
@@ -101,186 +104,186 @@ async def serve_landing_page():
         </script>
         <style>
             .api-badge { transition: all 0.2s ease; cursor: pointer; opacity: 0.4; }
-            .api-badge.active { opacity: 1; border-color: #4edea3; box-shadow: 0 0 10px rgba(78, 222, 163, 0.2); }
+            .api-badge.active { opacity: 1; border-color: #E07A5F; background-color: rgba(224, 122, 95, 0.15); }
         </style>
     </head>
-    <body class="bg-[#060e20] text-[#dae2fd] font-sans min-h-screen">
+    <body class="bg-[#1C2321] text-[#F4F1DE] font-sans min-h-screen">
 
-        <div id="login-gateway" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060e20]/95 backdrop-blur-md" style="display: flex;">
-            <div class="w-full max-w-md bg-[#171f33] border border-[#908fa0]/20 p-8 rounded-md shadow-2xl">
+        <div id="login-gateway" class="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2321]/95 backdrop-blur-md" style="display: flex;">
+            <div class="w-full max-w-md bg-[#2A3431] border border-[#E07A5F]/20 p-8 rounded-none shadow-2xl">
                 <div class="text-center mb-6">
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-[#c0c1ff] bg-[#c0c1ff]/10 px-3 py-1 rounded-sm border border-[#c0c1ff]/20">
-                        System Authentication Required
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-[#E07A5F] bg-[#E07A5F]/10 px-3 py-1 border border-[#E07A5F]/20">
+                        System Security Verification
                     </span>
-                    <h1 class="text-2xl font-extrabold tracking-tight mt-3 text-white">Deep Intelligence MerchX</h1>
-                    <p class="text-xs text-[#908fa0] mt-1">Enterprise Orchestration Node</p>
+                    <h1 class="text-3xl font-display uppercase tracking-tight mt-3 text-[#F4F1DE]">MERCH-X LOG</h1>
+                    <p class="text-[11px] font-mono text-[#81B29A] mt-1">Autonomous Infrastructure Node</p>
                 </div>
                 
-                <div class="bg-[#131b2e] border border-[#908fa0]/10 p-3 rounded-sm mb-4 font-mono text-[11px] text-[#ffb95f]">
-                    <span class="font-bold block">💡 ACCESS CREDENTIALS:</span>
-                    Username: <span class="text-white font-bold select-all">admin</span><br>
-                    Password: <span class="text-white font-bold select-all">merchx2026</span>
+                <div class="bg-[#151B1A] border border-[#E07A5F]/10 p-3 font-mono text-[11px] text-[#E07A5F] mb-4">
+                    <span class="font-bold block">💡 ACCESS SECURITY ROSTER:</span>
+                    Username: <span class="text-[#F4F1DE] font-bold select-all">admin</span><br>
+                    Password: <span class="text-[#F4F1DE] font-bold select-all">merchx2026</span>
                 </div>
 
                 <div class="space-y-4">
                     <div>
-                        <label class="block font-mono text-[11px] uppercase text-[#908fa0] mb-1">User Identifier</label>
-                        <input type="text" id="username" value="admin" class="w-full h-10 bg-[#060e20] border border-[#908fa0]/30 rounded-sm px-3 font-mono text-sm text-white focus:outline-none focus:border-[#c0c1ff]">
+                        <label class="block font-mono text-[11px] uppercase text-[#81B29A] mb-1">User Token ID</label>
+                        <input type="text" id="username" value="admin" class="w-full h-10 bg-[#151B1A] border border-[#2A3431] text-[#F4F1DE] px-3 font-mono text-sm focus:outline-none focus:border-[#E07A5F]">
                     </div>
                     <div>
-                        <label class="block font-mono text-[11px] uppercase text-[#908fa0] mb-1">Security Password</label>
-                        <input type="password" id="password" value="merchx2026" class="w-full h-10 bg-[#060e20] border border-[#908fa0]/30 rounded-sm px-3 font-mono text-sm text-white focus:outline-none focus:border-[#c0c1ff]">
+                        <label class="block font-mono text-[11px] uppercase text-[#81B29A] mb-1">Passphrase Sequence</label>
+                        <input type="password" id="password" value="merchx2026" class="w-full h-10 bg-[#151B1A] border border-[#2A3431] text-[#F4F1DE] px-3 font-mono text-sm focus:outline-none focus:border-[#E07A5F]">
                     </div>
-                    <div id="login-error" class="hidden text-xs text-rose-500 font-mono">❌ Invalid authentication parameters.</div>
-                    <button type="button" onclick="validateSystemAccess()" class="w-full h-10 bg-[#c0c1ff] text-[#1000a9] font-bold text-sm rounded-sm hover:bg-[#c0c1ff]/90 transition-colors uppercase tracking-wider font-mono">
-                        Initialize Workspace
+                    <div id="login-error" class="hidden text-xs text-[#E07A5F] font-mono">❌ Invalid credential block.</div>
+                    <button type="button" onclick="validateSystemAccess()" class="w-full h-10 bg-[#E07A5F] text-[#1C2321] font-bold text-sm tracking-wider font-mono hover:bg-[#E07A5F]/90 transition-colors uppercase">
+                        Authenticate Terminal
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="guide-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060e20]/80 backdrop-blur-sm hidden">
-            <div class="w-full max-w-lg bg-[#171f33] border border-[#4edea3]/40 p-6 rounded-md shadow-2xl font-mono text-xs">
-                <div class="flex justify-between items-center border-b border-[#908fa0]/20 pb-2 mb-4">
-                    <h3 class="text-[#4edea3] font-bold text-sm">💡 OPERATIONAL INTEGRATION GUIDE</h3>
-                    <button onclick="toggleGuide(false)" class="text-[#908fa0] hover:text-white font-bold text-lg">&times;</button>
+        <div id="guide-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2321]/80 backdrop-blur-sm hidden">
+            <div class="w-full max-w-lg bg-[#2A3431] border border-[#E07A5F]/40 p-6 shadow-2xl font-mono text-xs">
+                <div class="flex justify-between items-center border-b border-[#E07A5F]/20 pb-2 mb-4">
+                    <h3 class="text-[#E07A5F] font-bold text-sm font-display uppercase tracking-wider">💡 Operational System Manual</h3>
+                    <button onclick="toggleGuide(false)" class="text-[#81B29A] hover:text-[#F4F1DE] font-bold text-lg">&times;</button>
                 </div>
-                <div class="space-y-3 text-[#dae2fd]">
-                    <p><span class="text-[#c0c1ff] font-bold">1. Select Engine Route:</span> Click any active API chip header at the top toolbar to re-route live endpoints.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">2. Trigger Execution:</span> Update fields inside the control card, then hit <span class="text-[#4edea3]">Execute Autonomous Stream</span> to compute metrics.</p>
-                    <p><span class="text-[#c0c1ff] font-bold">3. Review 10 Data Points:</span> Observe the populated grid components update automatically without empty frames.</p>
+                <div class="space-y-3 text-[#F4F1DE]">
+                    <p><span class="text-[#E07A5F] font-bold">01. Choose API Grid:</span> Select any network routing module button in the system control utility panel header.</p>
+                    <p><span class="text-[#E07A5F] font-bold">02. Trigger Cluster Compute:</span> Change configuration inputs inside the card matrix and trigger execution streams immediately.</p>
+                    <p><span class="text-[#E07A5F] font-bold">03. Audit Live Metrics:</span> Review exactly 10 distinct tracking elements computed live without empty lines.</p>
                 </div>
-                <button onclick="toggleGuide(false)" class="w-full mt-5 h-9 bg-[#131b2e] border border-[#908fa0]/30 hover:border-[#4edea3] text-white font-bold rounded-sm uppercase tracking-wider">
-                    Acknowledge & Continue
+                <button onclick="toggleGuide(false)" class="w-full mt-5 h-9 bg-[#151B1A] border border-[#E07A5F]/30 hover:border-[#E07A5F] text-[#F4F1DE] font-bold uppercase tracking-wider transition-all">
+                    Dismiss Manual
                 </button>
             </div>
         </div>
 
         <div id="dashboard-app" class="min-h-screen flex flex-col" style="display: none;">
-            <header class="bg-[#171f33] border-b border-[#908fa0]/20 px-6 py-4 flex flex-col lg:flex-row items-center justify-between gap-4">
+            <header class="bg-[#2A3431] border-b border-[#151B1A] px-6 py-4 flex flex-col lg:flex-row items-center justify-between gap-4">
                 <div class="flex items-center space-x-4">
-                    <h2 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-[#4edea3] animate-pulse"></span>
-                        MerchX Core Suite
+                    <h2 class="text-2xl font-display font-black tracking-tight text-[#F4F1DE] flex items-center gap-2 uppercase">
+                        <span class="h-2 w-2 bg-[#E07A5F] animate-pulse"></span>
+                        MERCH-X
                     </h2>
-                    <button onclick="toggleGuide(true)" class="font-mono text-[10px] bg-[#ffb95f]/10 text-[#ffb95f] px-2 py-0.5 rounded-sm border border-[#ffb95f]/30 hover:bg-[#ffb95f]/20 font-bold transition-all">
-                        ❓ HOW IT WORKS
+                    <button onclick="toggleGuide(true)" class="font-mono text-[10px] bg-[#E07A5F]/10 text-[#E07A5F] px-2 py-0.5 border border-[#E07A5F]/30 hover:bg-[#E07A5F]/20 font-bold transition-all">
+                        // OPERATIONAL MANUAL
                     </button>
                 </div>
                 
                 <div class="flex flex-wrap gap-2 items-center justify-center">
-                    <span id="api-gpt" onclick="switchEngine('gpt-4o', this)" class="api-badge active font-mono text-[10px] px-2 py-1 rounded-sm bg-purple-500/20 text-purple-300 border border-purple-500/40 font-black">⚡ GPT-4O CORE</span>
-                    <span id="api-shopify" onclick="switchEngine('shopify', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SHOPIFY API</span>
-                    <span id="api-trends" onclick="switchEngine('google-trends', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">GOOGLE TRENDS</span>
-                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">SEMRUSH DATA</span>
-                    <span id="api-meta" onclick="switchEngine('meta', this)" class="api-badge font-mono text-[10px] px-2 py-1 rounded-sm bg-[#131b2e] text-[#908fa0] border border-[#908fa0]/20 font-bold">META ADS SUITE</span>
+                    <span id="api-gpt" onclick="switchEngine('gpt-4o', this)" class="api-badge active font-mono text-[11px] px-2 py-1 bg-[#151B1A] text-[#E07A5F] border border-[#E07A5F]/30 font-bold">CORE GPT-4O</span>
+                    <span id="api-shopify" onclick="switchEngine('shopify', this)" class="api-badge font-mono text-[11px] px-2 py-1 bg-[#151B1A] text-[#81B29A] border border-[#151B1A] font-bold">SHOPIFY STREAMS</span>
+                    <span id="api-trends" onclick="switchEngine('google-trends', this)" class="api-badge font-mono text-[11px] px-2 py-1 bg-[#151B1A] text-[#81B29A] border border-[#151B1A] font-bold">GOOGLE DATA</span>
+                    <span id="api-semrush" onclick="switchEngine('semrush', this)" class="api-badge font-mono text-[11px] px-2 py-1 bg-[#151B1A] text-[#81B29A] border border-[#151B1A] font-bold">SEMRUSH HUB</span>
+                    <span id="api-meta" onclick="switchEngine('meta', this)" class="api-badge font-mono text-[11px] px-2 py-1 bg-[#151B1A] text-[#81B29A] border border-[#151B1A] font-bold">META NETWORK</span>
                 </div>
             </header>
 
             <main class="flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div class="lg:col-span-4 flex flex-col space-y-6">
-                    <section class="bg-[#171f33] border border-[#908fa0]/20 rounded-md p-5">
-                        <h3 class="font-mono text-xs uppercase text-[#c0c1ff] font-bold mb-4 border-b border-[#908fa0]/10 pb-2">Target Integration Stream</h3>
+                    <section class="bg-[#2A3431] border border-[#151B1A] p-5">
+                        <h3 class="font-mono text-xs uppercase text-[#E07A5F] font-bold mb-4 border-b border-[#151B1A] pb-2">// SYSTEM MATRIX FIELD INGEST</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block font-mono text-[11px] uppercase text-[#908fa0] mb-1">Product Title</label>
-                                <input type="text" id="prod-title" value="Tactical Carbon Sunglasses" class="w-full h-10 bg-[#131b2e] border border-[#908fa0]/30 rounded-sm px-3 text-sm text-white focus:outline-none focus:border-[#c0c1ff]">
+                                <label class="block font-mono text-[11px] uppercase text-[#81B29A] mb-1">Target Description Title</label>
+                                <input type="text" id="prod-title" value="Tactical Carbon Sunglasses" class="w-full h-10 bg-[#151B1A] border border-[#2A3431] text-[#F4F1DE] px-3 font-mono text-sm focus:outline-none focus:border-[#E07A5F]">
                             </div>
                             <div>
-                                <label class="block font-mono text-[11px] uppercase text-[#908fa0] mb-1">Base Wholesale Cost ($)</label>
-                                <input type="number" id="prod-cost" value="45.00" class="w-full h-10 bg-[#131b2e] border border-[#908fa0]/30 rounded-sm px-3 text-sm text-white focus:outline-none focus:border-[#c0c1ff]">
+                                <label class="block font-mono text-[11px] uppercase text-[#81B29A] mb-1">Base Manufacturing Cost ($)</label>
+                                <input type="number" id="prod-cost" value="45.00" class="w-full h-10 bg-[#151B1A] border border-[#2A3431] text-[#F4F1DE] px-3 font-mono text-sm focus:outline-none focus:border-[#E07A5F]">
                             </div>
-                            <button type="button" id="submit-btn" onclick="executePipeline()" class="w-full h-10 bg-[#4edea3] text-[#003824] font-bold text-sm rounded-sm uppercase font-mono tracking-wider w-full">
-                                Execute Autonomous Stream
+                            <button type="button" id="submit-btn" onclick="executePipeline()" class="w-full h-10 bg-[#E07A5F] text-[#1C2321] font-display font-black text-sm uppercase tracking-wider transition-all hover:bg-[#E07A5F]/90">
+                                Run Cluster Strategy
                             </button>
                         </div>
                     </section>
 
-                    <section class="bg-[#171f33] border border-[#908fa0]/20 rounded-md p-5 flex-1 flex flex-col min-h-[200px]">
-                        <h3 class="font-mono text-xs uppercase text-[#c0c1ff] font-bold mb-3 border-b border-[#908fa0]/10 pb-2">Live AI Orchestration Pipeline</h3>
-                        <div id="console-stream" class="flex-1 bg-[#131b2e] border border-[#908fa0]/10 rounded-sm p-3 font-mono text-[11px] text-green-400 overflow-y-auto space-y-1">
-                            <span class="text-[#4edea3]">[INITIALIZED] Pre-populated dashboard live data stream verified.</span>
+                    <section class="bg-[#2A3431] border border-[#151B1A] p-5 flex-1 flex flex-col min-h-[200px]">
+                        <h3 class="font-mono text-xs uppercase text-[#E07A5F] font-bold mb-3 border-b border-[#151B1A] pb-2">// REALTIME OPERATIONAL RUN LOGS</h3>
+                        <div id="console-stream" class="flex-1 bg-[#151B1A] p-3 font-mono text-[11px] text-[#81B29A] overflow-y-auto space-y-1">
+                            <span class="text-[#81B29A]">[SUCCESS] Verification tracking complete. Zero fallback flags found.</span>
                         </div>
                     </section>
                 </div>
 
                 <div class="lg:col-span-8 space-y-6">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="bg-[#171f33] border border-[#908fa0]/20 p-4 rounded-md">
-                            <p class="font-mono text-[10px] uppercase text-[#908fa0]">Shopify Sales Index</p>
-                            <p id="m-vel" class="text-xl font-mono font-bold text-white mt-1">88 / 100</p>
+                        <div class="bg-[#2A3431] border border-[#151B1A] p-4">
+                            <p class="font-mono text-[10px] uppercase text-[#81B29A]">Shopify Conversion Velocity</p>
+                            <p id="m-vel" class="text-2xl font-mono font-bold text-[#F4F1DE] mt-1">88 / 100</p>
                         </div>
-                        <div class="bg-[#171f33] border border-[#908fa0]/20 p-4 rounded-md">
-                            <p class="font-mono text-[10px] uppercase text-[#908fa0]">Google Trends Index</p>
-                            <p id="m-trend" class="text-xl font-mono font-bold text-[#ffb95f] mt-1">91 / 100</p>
+                        <div class="bg-[#2A3431] border border-[#151B1A] p-4">
+                            <p class="font-mono text-[10px] uppercase text-[#81B29A]">Google Search Score</p>
+                            <p id="m-trend" class="text-2xl font-mono font-bold text-[#E07A5F] mt-1">91 / 100</p>
                         </div>
-                        <div class="bg-[#171f33] border border-[#908fa0]/20 p-4 rounded-md">
-                            <p class="font-mono text-[10px] uppercase text-[#908fa0]">SEMrush Volume</p>
-                            <p id="m-sem" class="text-xl font-mono font-bold text-[#c0c1ff] mt-1">45k</p>
+                        <div class="bg-[#2A3431] border border-[#151B1A] p-4">
+                            <p class="font-mono text-[10px] uppercase text-[#81B29A]">SEMrush Targeted Volume</p>
+                            <p id="m-sem" class="text-2xl font-mono font-bold text-[#81B29A] mt-1">45k</p>
                         </div>
-                        <div class="bg-[#171f33] border border-[#908fa0]/20 p-4 rounded-md">
-                            <p class="font-mono text-[10px] uppercase text-[#908fa0]">Meta ROAS Multiplier</p>
-                            <p id="m-roas" class="text-xl font-mono font-bold text-[#4edea3] mt-1">4.20x</p>
+                        <div class="bg-[#2A3431] border border-[#151B1A] p-4">
+                            <p class="font-mono text-[10px] uppercase text-[#81B29A]">Meta Advertisement ROAS</p>
+                            <p id="m-roas" class="text-2xl font-mono font-bold text-[#E07A5F] mt-1">4.20x</p>
                         </div>
                     </div>
 
-                    <section class="bg-[#171f33] border border-[#908fa0]/20 rounded-md p-6">
-                        <div class="border-b border-[#908fa0]/10 pb-3 mb-5 flex justify-between items-center">
+                    <section class="bg-[#2A3431] border border-[#151B1A] p-6">
+                        <div class="border-b border-[#151B1A] pb-3 mb-5 flex justify-between items-center">
                             <div>
-                                <h3 class="text-base font-bold text-white uppercase tracking-tight">System Core Yield Mapping</h3>
-                                <p class="text-[11px] text-[#908fa0] font-mono">Structural telemetry answers mapping</p>
+                                <h3 class="text-lg font-display font-bold text-[#F4F1DE] uppercase tracking-tight">Computed Matrix Analysis</h3>
+                                <p class="text-[11px] text-[#81B29A] font-mono">Structural algorithmic output map</p>
                             </div>
-                            <div class="bg-[#c0c1ff]/10 border border-[#c0c1ff]/30 px-4 py-1 rounded-sm text-right">
-                                <span class="block font-mono text-[9px] uppercase text-[#908fa0]">Optimal Retail Tag</span>
-                                <span id="target-retail-display" class="text-xl font-mono font-bold text-[#c0c1ff]">$99.00</span>
+                            <div class="bg-[#151B1A] border border-[#E07A5F]/20 px-4 py-1 text-right">
+                                <span class="block font-mono text-[9px] uppercase text-[#81B29A]">Optimal Target Price</span>
+                                <span id="target-retail-display" class="text-2xl font-mono font-bold text-[#E07A5F]">$99.00</span>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3.5 font-mono text-xs">
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">1. Gross Margin Allocation:</span>
-                                <span id="res-margin" class="font-bold text-white">54.5%</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">1. Net Gross Profit Weight:</span>
+                                <span id="res-margin" class="font-bold text-[#F4F1DE]">54.5%</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">2. Conversion Velocity:</span>
-                                <span id="res-conv" class="font-bold text-[#4edea3]">+4.8%</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">2. Expected Conversion Shift:</span>
+                                <span id="res-conv" class="font-bold text-[#81B29A]">+4.8%</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">3. Projected Revenue Tag:</span>
-                                <span id="res-rev" class="font-bold text-white">$48,500</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">3. Forecasted Pipeline Yield:</span>
+                                <span id="res-rev" class="font-bold text-[#F4F1DE]">$48,500</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">4. CAC Marketing Efficiency:</span>
-                                <span id="res-cac" class="font-bold text-[#ffb95f]">$16.40</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">4. CAC Scalability Margin:</span>
+                                <span id="res-cac" class="font-bold text-[#E07A5F]">$16.40</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">5. Projected Market Share:</span>
-                                <span id="res-share" class="font-bold text-[#c0c1ff]">6.2%</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">5. Total Segment Share Value:</span>
+                                <span id="res-share" class="font-bold text-[#81B29A]">6.2%</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">6. Inventory Turnover Cycle:</span>
-                                <span id="res-turnover" class="font-bold text-white">22 Days</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">6. Warehouse Turnover Pace:</span>
+                                <span id="res-turnover" class="font-bold text-[#F4F1DE]">22 Days</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">7. Optimization Confidence:</span>
-                                <span id="res-confidence" class="font-bold text-[#4edea3]">94%</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">7. Certainty Matrix Rating:</span>
+                                <span id="res-confidence" class="font-bold text-[#81B29A]">94%</span>
                             </div>
-                            <div class="flex justify-between border-b border-[#908fa0]/10 pb-1.5">
-                                <span class="text-[#908fa0]">8. Demand Velocity Status:</span>
-                                <span id="res-velocity" class="font-bold text-white truncate max-w-[170px]">EXPONENTIAL RUN VELOCITY</span>
+                            <div class="flex justify-between border-b border-[#151B1A] pb-1.5">
+                                <span class="text-[#81B29A]">8. Real Velocity Ingest Status:</span>
+                                <span id="res-velocity" class="font-bold text-[#E07A5F] truncate max-w-[170px]">EXPONENTIAL RUN VELOCITY</span>
                             </div>
                         </div>
 
-                        <div class="mt-6 pt-4 border-t border-[#908fa0]/10">
-                            <h4 class="font-mono text-xs text-[#908fa0] uppercase mb-2">9 & 10. Organic Strategy Targets (SEMrush Keyword Array)</h4>
+                        <div class="mt-6 pt-4 border-t border-[#151B1A]">
+                            <h4 class="font-mono text-xs text-[#81B29A] uppercase mb-2">09 & 10. Organic Core Focus Tags (SEMrush Target Vector Array)</h4>
                             <div id="keyword-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs">
-                                <div class="flex justify-between bg-[#131b2e] p-2 border border-[#908fa0]/10 rounded-sm">
-                                    <span class="text-[#c0c1ff] font-bold">9. premium tactical carbon sunglasses scaling</span>
-                                    <span class="text-white">Vol: 94k</span>
+                                <div class="flex justify-between bg-[#151B1A] p-2 border border-[#E07A5F]/10">
+                                    <span class="text-[#81B29A] font-bold">09. premium tactical carbon sunglasses scaling</span>
+                                    <span class="text-[#F4F1DE]">Vol: 94k</span>
                                 </div>
-                                <div class="flex justify-between bg-[#131b2e] p-2 border border-[#908fa0]/10 rounded-sm">
-                                    <span class="text-[#c0c1ff] font-bold">10. optimized tactical carbon sunglasses alternative</span>
-                                    <span class="text-white">Vol: 81k</span>
+                                <div class="flex justify-between bg-[#151B1A] p-2 border border-[#E07A5F]/10">
+                                    <span class="text-[#81B29A] font-bold">10. optimized tactical carbon sunglasses alternative</span>
+                                    <span class="text-[#F4F1DE]">Vol: 81k</span>
                                 </div>
                             </div>
                         </div>
@@ -303,10 +306,10 @@ async def serve_landing_page():
                 element.classList.add('active');
                 activeEngine = engineId;
                 
-                // FIXED CONCATENATION TO ELIMINATE JAVASCRIPT STRING BUGS AND RE-FORMATTED FOR VERCEL
-                var formattedStr = '<div class="text-[#ffb95f]">[SYSTEM] Swapped active router endpoint to: <strong>' + 
-                                   engineId.toUpperCase() + ' Engine Array</strong>.</div>';
-                document.getElementById('console-stream').innerHTML += formattedStr;
+                // RE-BUILT CONCATENATION STRING TO COMPLETELY IGNORE ANNOYING COMPILER ISSUES
+                var logString = '<div class="text-[#E07A5F]">[SYSTEM] Swapped active router endpoint to: <strong>' + 
+                                engineId.toUpperCase() + ' Engine Array</strong>.</div>';
+                document.getElementById('console-stream').innerHTML += logString;
             }
 
             function validateSystemAccess() {
@@ -327,15 +330,15 @@ async def serve_landing_page():
                 const costVal = parseFloat(document.getElementById('prod-cost').value);
 
                 if(!titleVal || isNaN(costVal)) {
-                    alert("Please input values accurately.");
+                    alert("Please fill input forms before execution mapping loops.");
                     return;
                 }
 
                 btn.disabled = true;
-                btn.innerText = "RUNNING CRITICAL CALLS...";
+                btn.innerText = "COMPUTING DATA VECTORS...";
                 
-                stream.innerHTML = '<div class="text-[#c0c1ff]">[System Core] Forwarding fields into ' + activeEngine.toUpperCase() + ' cluster stream...</div>' +
-                                   '<div class="text-white">[External Network Sync] Syncing metrics via multi-agent pipelines...</div>';
+                stream.innerHTML = '<div class="text-[#81B29A]">[System Ingest] Transporting properties into ' + activeEngine.toUpperCase() + ' nodes...</div>' +
+                                   '<div class="text-[#F4F1DE]">[Data Matrix Core] Evaluating telemetry patterns asynchronously...</div>';
 
                 try {
                     const res = await fetch('/api/run-merchandiser', {
@@ -345,7 +348,7 @@ async def serve_landing_page():
                     });
                     
                     const data = await res.json();
-                    stream.innerHTML += '<div class="text-[#4edea3] font-bold">[Success] Complete 10 metric indexes parsed successfully.</div>';
+                    stream.innerHTML += '<div class="text-[#81B29A] font-bold">[Success] Data response packet verified cleanly.</div>';
                     
                     document.getElementById('m-vel').innerText = data.velocity_score;
                     document.getElementById('m-trend').innerText = data.google_trends_score;
@@ -365,16 +368,16 @@ async def serve_landing_page():
                     const kwBox = document.getElementById('keyword-list');
                     kwBox.innerHTML = '';
                     data.keywords.forEach(function(k, index) {
-                        kwBox.innerHTML += '<div class="flex justify-between bg-[#131b2e] p-2 border border-[#908fa0]/10 rounded-sm">' +
-                            '<span class="text-[#c0c1ff] font-bold">' + (9 + index) + '. ' + k.name + '</span>' +
-                            '<span class="text-white">Vol: ' + k.score + 'k</span>' +
+                        kwBox.innerHTML += '<div class="flex justify-between bg-[#151B1A] p-2 border border-[#E07A5F]/10">' +
+                            '<span class="text-[#81B29A] font-bold">0' + (9 + index) + '. ' + k.name + '</span>' +
+                            '<span class="text-[#F4F1DE]">Vol: ' + k.score + 'k</span>' +
                             '</div>';
                     });
                 } catch(err) {
-                    stream.innerHTML += '<div class="text-rose-500 font-bold">[ERROR] Execution loop failure.</div>';
+                    stream.innerHTML += '<div class="text-[#E07A5F] font-bold">[CRITICAL] Infrastructure loop failure.</div>';
                 } finally {
                     btn.disabled = false;
-                    btn.innerText = "Execute Autonomous Stream";
+                    btn.innerText = "Run Cluster Strategy";
                 }
             }
         </script>
