@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 import random
 
-app = FastAPI(title="MERCH-X Core Suite")
+app = FastAPI(title="MERCH-X")
 
 app.add_middleware(
     CORSMiddleware,
@@ -82,7 +82,7 @@ async def serve_landing_page():
         "<head>"
         "<meta charset='UTF-8'>"
         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-        "<title>MERCH-X Core Suite</title>"
+        "<title>MERCH-X</title>"
         "<script src='https://cdn.tailwindcss.com'></script>"
         "<link rel='preconnect' href='https://fonts.googleapis.com'>"
         "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
@@ -123,7 +123,7 @@ async def serve_landing_page():
         "  <div id='auth-portal' class='w-full max-w-md bg-[#2A3431] p-8 border border-[#4E5E5A] rounded-sm shadow-2xl my-auto'>"
         "    <div class='text-center mb-6'>"
         "      <span class='font-mono text-[10px] uppercase tracking-widest text-[#E07A5F] border border-[#E07A5F]/30 px-2 py-0.5 bg-[#E07A5F]/5'>System Access Control</span>"
-        "      <h1 class='text-3xl font-display font-bold tracking-tight mt-3 uppercase'>MERCH-X LOG</h1>"
+        "      <h1 class='text-3xl font-display font-bold tracking-tight mt-3 uppercase'>MERCH-X</h1>"
         "      <p class='text-[11px] font-mono text-[#81B29A] mt-0.5'>Autonomous Infrastructure Node</p>"
         "    </div>"
         "    "
@@ -176,7 +176,7 @@ async def serve_landing_page():
         "    <div class='flex flex-wrap items-center justify-between gap-4 bg-[#2A3431] border border-[#4E5E5A] p-4 font-mono text-[10px] font-bold text-[#81B29A] uppercase tracking-wider'>"
         "      <div class='flex items-center space-x-2 text-[#F4F1DE] text-sm font-display font-black tracking-tight'>"
         "        <span class='h-2 w-2 bg-[#81B29A] rounded-full animate-pulse'></span>"
-        "        <span>MERCH-X CORE SUITE</span>"
+        "        <span>MERCH-X</span>"
         "      </div>"
         "      <div class='flex flex-wrap gap-2'>"
         "        <span id='badge-gpt' class='api-badge active border border-[#4E5E5A] px-3 py-1 bg-[#1E2623] text-[#E07A5F]'>GPT-4O LAYER</span>"
@@ -405,7 +405,7 @@ async def serve_landing_page():
         "    tagsContainer.innerHTML = '';"
         "    payload.keywords.forEach(function(item, idx) {"
         "      let stepStr = (idx === 0) ? '09' : '10';"
-        "      tagsContainer.innerHTML += '<div class=\"flex justify-between items-center bg-[#1E2623] p-4 border border-[#4E5E5A] w-full min-h-[54px]\"><span class=\"text-[#81B29A]\">' + stepStr + '. ' + item.name + '</span><span class=\"text-[#F4F1DE] border border-[#4E5E5A] px-2 py-0.5 bg-[#2A3431] font-bold shrink-0 ml-2\">Vol: ' + item.score + 'k</span></div>';"
+        "      tagsContainer.innerHTML += '<div class=\"flex justify-between items-center bg-[#1E2623] p-4 border border-[#4E5E5A] w-full min-h-[54px]\"><span class=\"text-[#81B29A]\">' + stepStr + '. ' + item.name + '</span><span class=\"text=\"#F4F1DE\" border border-[#4E5E5A] px-2 py-0.5 bg-[#2A3431] font-bold shrink-0 ml-2\">Vol: ' + item.score + 'k</span></div>';"
         "    });"
         "  } catch(err) {"
         "    systemLogger.innerHTML += '<div class=\"text-[#E07A5F]\">[CRITICAL] Execution pipeline failed. Vector array dropped.</div>';"
